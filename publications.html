@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Publications · Aditya Kulkarni</title>
+  <meta name="description" content="Publications and talks by Aditya Kulkarni.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="site-head">
+    <a class="mark" href="index.html">Aditya Kulkarni</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html" aria-current="page">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="cv.pdf">CV</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <h1>Publications</h1>
+      <p>Papers in statistics and machine learning are marked in teal, and papers in physics in indigo. The full list is also on <a href="https://scholar.google.com/citations?user=VPbzASIAAAAJ">Google Scholar</a>.</p>
+    </section>
+
+    <!--
+      TO ADD A PAPER: copy one <div class="pub ..."> block and paste it under the right year.
+      Use class="pub stat" for statistics/ML papers and class="pub phys" for physics papers.
+    -->
+    <div class="two-col pubs-layout">
+      <div>
+        <div class="filters ui" role="group" aria-label="Filter publications">
+          <button type="button" data-f="all" aria-pressed="true">All</button>
+          <button type="button" data-f="stat" aria-pressed="false"><span class="key" style="background:var(--stat)"></span>Statistics &amp; ML</button>
+          <button type="button" data-f="phys" aria-pressed="false"><span class="key" style="background:var(--phys)"></span>Physics</button>
+        </div>
+
+        <p class="pub-year">2026</p>
+        <div class="pub stat">
+          <a class="title" href="https://arxiv.org/abs/2610.18504">How low can you go: fine-tuning LLMs with Bayesian optimization (LlMBO)</a>
+          <span class="meta"><b>A. Kulkarni</b>, D. Sartor, C. Soto, N. Wycoff</span>
+          <span class="venue">Preprint, arXiv:2610.18504</span>
+          <span class="links"><a href="https://arxiv.org/abs/2610.18504">arXiv</a></span>
+        </div>
+        <div class="pub stat">
+          <a class="title" href="https://proceedings.mlr.press/v306/kulkarni26b.html">Differentially private geodesic regression</a>
+          <span class="meta"><b>A. Kulkarni</b>, C. Soto</span>
+          <span class="venue">International Conference on Machine Learning (ICML), PMLR</span>
+          <span class="links"><a href="https://proceedings.mlr.press/v306/kulkarni26b.html">Paper</a></span>
+        </div>
+        <div class="pub phys">
+          <a class="title" href="https://arxiv.org/abs/2608.29244">The onset of the strong backreaction regime in axion inflation, an analytical study</a>
+          <span class="meta"><b>A. Kulkarni</b>, L. Sorbo</span>
+          <span class="venue">Preprint, arXiv:2608.29244</span>
+          <span class="links"><a href="https://arxiv.org/abs/2608.29244">arXiv</a></span>
+        </div>
+
+        <p class="pub-year">2025</p>
+        <div class="pub phys">
+          <a class="title" href="https://doi.org/10.1088/1475-7516/2025/01/039">Spectra of fermions produced by a time-dependent axion in the radiation- and matter-dominated universe</a>
+          <span class="meta"><b>A. Kulkarni</b>, L. Sorbo</span>
+          <span class="venue">Journal of Cosmology and Astroparticle Physics 2025(01), 039</span>
+          <span class="links"><a href="https://doi.org/10.1088/1475-7516/2025/01/039">Journal</a></span>
+        </div>
+
+        <p class="pub-year">In progress</p>
+        <div class="pub stat">
+          <span class="title">Differential privacy over Lie groups</span>
+          <span class="meta"><b>A. Kulkarni</b>, et al.</span>
+        </div>
+      </div>
+
+      <aside>
+        <h2 class="side-h">Talks</h2>
+        <ul class="rows">
+          <li><time>Sep 2026</time><span><b>Analytical study of strong backreaction</b><span class="sub">School of Basic Sciences, Campania, Italy</span></span></li>
+          <li><time>Aug 2026</time><span><b>Analytical study of strong backreaction</b><span class="sub">Conference on Particle Physics &amp; Cosmology, Leiden</span></span></li>
+          <li><time>Jul 2026</time><span><b>Differentially private geodesic regression</b><span class="sub">ICML 2026, Seoul</span></span></li>
+          <li><time>Feb 2026</time><span><b>Differentially private geodesic regression</b><span class="sub">Privacy and Public Policy Conference, Washington, DC</span></span></li>
+        </ul>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="site-foot">
+    <span>abkulkarni@umass.edu</span>
+    <nav>
+      <a href="mailto:abkulkarni@umass.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=VPbzASIAAAAJ">Google Scholar</a>
+      <a href="cv.pdf">CV</a>
+    </nav>
+  </footer>
+
+</div>
+<script>
+  // Publication filter
+  const buttons = document.querySelectorAll(".filters button");
+  buttons.forEach((b) => b.addEventListener("click", () => {
+    buttons.forEach((x) => x.setAttribute("aria-pressed", x === b));
+    const f = b.dataset.f;
+    document.querySelectorAll(".pub").forEach((p) =>
+      p.classList.toggle("hidden", f !== "all" && !p.classList.contains(f)));
+    document.querySelectorAll(".pub-year").forEach((y) => {
+      let n = y.nextElementSibling, any = false;
+      while (n && n.classList.contains("pub")) { if (!n.classList.contains("hidden")) any = true; n = n.nextElementSibling; }
+      y.style.display = any ? "" : "none";
+    });
+  }));
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Research · Aditya Kulkarni</title>
+  <meta name="description" content="Research by Aditya Kulkarni in differential privacy, Bayesian optimization for language models, and axion cosmology.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="site-head">
+    <a class="mark" href="index.html">Aditya Kulkarni</a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="research.html" aria-current="page">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="cv.pdf">CV</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-intro">
+      <h1>Research</h1>
+      <p>My work runs along two lines that share one approach: find the mathematical structure that makes a problem tractable, build analytical tools around it, and check them carefully against computation.</p>
+      <div class="jump">
+        <a class="s" href="#statistics">Statistics &amp; machine learning</a>
+        <a class="p" href="#physics">Theoretical physics</a>
+      </div>
+    </section>
+
+    <!-- ================= STATISTICS & ML ================= -->
+    <div class="track-head stat" id="statistics">
+      <h2>Statistics &amp; machine learning</h2>
+      <span>With Carlos Soto, Nathan Wycoff and Davide Sartor</span>
+    </div>
+
+    <article class="project" id="privacy">
+      <div class="body">
+        <h3>Differential privacy on manifolds</h3>
+        <p class="with">With Carlos Soto · ICML 2026</p>
+        <p>Brain shapes, rotations and covariance matrices don't live in flat space; they live on curved manifolds. The usual way to make a statistic private is to add Euclidean noise, but that can push the answer off the manifold and produce something that isn't a valid shape or matrix at all.</p>
+        <p>We built differentially private geodesic regression, where both the model and the privacy noise are defined on the manifold itself. My part was the sensitivity analysis that sets how much noise is needed, which I derived using Jacobi fields so that the bound reflects the curvature of the space. We tested it on spheres, positive-definite matrices, Kendall's shape space, and corpus callosum shapes from the Alzheimer's Disease Neuroimaging Initiative.</p>
+        <div class="papers"><a href="https://proceedings.mlr.press/v306/kulkarni26b.html">Read the paper (PMLR)</a></div>
+      </div>
+      <figure class="project-fig">
+        <svg class="fig" viewBox="0 0 400 250" role="img" aria-label="Euclidean noise moves a point off a curved manifold; intrinsic noise moves it along the manifold.">
+          <defs>
+            <marker id="ah-s" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" class="sf"/></marker>
+            <marker id="ah-i" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10 z" style="fill:var(--muted)"/></marker>
+          </defs>
+          <path d="M40 125 A260 260 0 0 1 360 125 L360 230 L40 230 Z" class="band-s"/>
+          <path d="M40 125 A260 260 0 0 1 360 125" class="ink"/>
+          <text x="54" y="214" class="lbl">manifold M</text>
+          <path d="M200 70 L246 28" style="stroke:var(--muted);stroke-width:1.6;fill:none" class="dash" marker-end="url(#ah-i)"/>
+          <circle cx="250" cy="25" r="5" style="fill:var(--paper-2);stroke:var(--muted);stroke-width:1.6"/>
+          <text x="262" y="24" class="lbl">Euclidean noise:</text>
+          <text x="262" y="38" class="lbl">off the manifold</text>
+          <path d="M200 70 A260 260 0 0 1 266 78.5" class="s" marker-end="url(#ah-s)"/>
+          <circle cx="270" cy="79.6" r="5.5" class="sf"/>
+          <text x="232" y="110" class="lbl">intrinsic noise:</text>
+          <text x="232" y="124" class="lbl">stays on M</text>
+          <circle cx="200" cy="70" r="5.5" style="fill:var(--ink)"/>
+          <text x="150" y="62" class="lbl">estimate</text>
+        </svg>
+        <figcaption>Why intrinsic privacy matters: noise added in flat space leaves the manifold, while noise defined on the manifold keeps the private release valid.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project" id="llmbo">
+      <div class="body">
+        <h3>Bayesian optimization for fine-tuning language models</h3>
+        <p class="with">With Carlos Soto, Nathan Wycoff and Davide Sartor · Preprint 2026</p>
+        <p>New parameterizations can adapt a large language model by learning only a handful of numbers. That leaves a small search space where every evaluation is expensive, which is exactly the setting Bayesian optimization is designed for.</p>
+        <p>LlMBO tunes those parameters using inference alone, with no backward passes. A Gaussian-process surrogate tracks how accurate each candidate is likely to be, and a trust region focuses the search. In very small adaptation spaces it matches or beats policy-gradient training (GRPO) on math reasoning benchmarks, while using substantially less compute and memory. I built the optimization and evaluation pipeline and designed the matched comparisons.</p>
+        <div class="papers"><a href="https://arxiv.org/abs/2610.18504">Read the preprint (arXiv)</a></div>
+      </div>
+      <figure class="project-fig">
+        <svg class="fig" viewBox="0 0 400 250" role="img" aria-label="A Gaussian process surrogate with uncertainty band, observed evaluations and a trust region.">
+          <rect x="150" y="14" width="66" height="200" style="fill:var(--stat);opacity:.08"/>
+          <path d="M150 14 V214 M216 14 V214" class="grid"/>
+          <text x="154" y="28" class="lbl">trust region</text>
+          <path d="M40.0 72.0 L42.9 74.6 L45.7 77.7 L48.6 80.9 L51.4 84.3 L54.3 87.5 L57.1 90.4 L60.0 92.9 L62.9 94.6 L65.7 95.6 L68.6 95.8 L71.4 95.0 L74.3 93.4 L77.1 91.1 L80.0 88.0 L82.9 84.5 L85.7 80.6 L88.6 76.5 L91.4 73.2 L94.3 75.5 L97.1 77.6 L100.0 79.5 L102.9 81.0 L105.7 81.8 L108.6 82.0 L111.4 81.4 L114.3 79.9 L117.1 77.4 L120.0 74.1 L122.9 70.1 L125.7 65.4 L128.6 60.3 L131.4 55.0 L134.3 49.6 L137.1 44.3 L140.0 39.4 L142.9 34.9 L145.7 31.0 L148.6 30.0 L151.4 31.9 L154.3 34.5 L157.1 37.6 L160.0 41.2 L162.9 45.2 L165.7 49.5 L168.6 53.8 L171.4 58.1 L174.3 62.1 L177.1 65.8 L180.0 69.1 L182.9 72.0 L185.7 74.4 L188.6 76.5 L191.4 78.3 L194.3 80.1 L197.1 81.8 L200.0 83.7 L202.9 85.9 L205.7 94.1 L208.6 103.2 L211.4 112.4 L214.3 121.4 L217.1 130.0 L220.0 138.0 L222.9 145.3 L225.7 151.6 L228.6 156.9 L231.4 161.2 L234.3 164.3 L237.1 166.6 L240.0 170.1 L242.9 176.2 L245.7 181.3 L248.6 185.2 L251.4 187.8 L254.3 189.1 L257.1 189.1 L260.0 187.9 L262.9 189.0 L265.7 190.7 L268.6 191.1 L271.4 190.3 L274.3 188.1 L277.1 184.7 L280.0 180.1 L282.9 174.5 L285.7 168.0 L288.6 160.9 L291.4 153.4 L294.3 145.7 L297.1 137.8 L300.0 130.0 L302.9 122.4 L305.7 115.1 L308.6 108.0 L311.4 104.5 L314.3 101.4 L317.1 98.7 L320.0 96.4 L322.9 94.6 L325.7 93.1 L328.6 91.8 L331.4 90.7 L334.3 89.6 L337.1 88.3 L340.0 86.7 L342.9 84.8 L345.7 82.3 L348.6 79.4 L351.4 76.1 L354.3 72.3 L357.1 68.3 L360.0 64.1 L362.9 60.0 L365.7 56.0 L368.6 52.4 L371.4 49.1 L374.3 46.4 L377.1 44.2 L380.0 42.6 L380.0 109.7 L377.1 106.8 L374.3 103.7 L371.4 100.6 L368.6 97.4 L365.7 94.4 L362.9 91.6 L360.0 89.2 L357.1 87.5 L354.3 86.6 L351.4 86.6 L348.6 87.7 L345.7 89.9 L342.9 93.3 L340.0 97.9 L337.1 103.4 L334.3 109.9 L331.4 117.1 L328.6 124.8 L325.7 132.8 L322.9 141.0 L320.0 149.1 L317.1 157.1 L314.3 164.9 L311.4 172.4 L308.6 179.4 L305.7 182.9 L302.9 185.9 L300.0 188.4 L297.1 190.4 L294.3 191.9 L291.4 193.0 L288.6 193.7 L285.7 194.3 L282.9 194.7 L280.0 195.2 L277.1 195.8 L274.3 196.7 L271.4 197.9 L268.6 199.4 L265.7 201.3 L262.9 203.3 L260.0 203.7 L257.1 200.7 L254.3 198.0 L251.4 195.5 L248.6 193.3 L245.7 191.5 L242.9 190.0 L240.0 188.7 L237.1 183.9 L234.3 177.2 L231.4 170.7 L228.6 164.8 L225.7 159.4 L222.9 154.6 L220.0 150.5 L217.1 146.9 L214.3 143.8 L211.4 141.0 L208.6 138.5 L205.7 136.1 L202.9 133.0 L200.0 124.2 L197.1 115.5 L194.3 107.1 L191.4 99.3 L188.6 92.2 L185.7 85.9 L182.9 80.8 L180.0 76.8 L177.1 73.9 L174.3 72.3 L171.4 71.9 L168.6 72.5 L165.7 73.9 L162.9 76.1 L160.0 78.8 L157.1 81.9 L154.3 85.2 L151.4 88.6 L148.6 92.0 L145.7 93.1 L142.9 91.8 L140.0 90.3 L137.1 88.8 L134.3 87.4 L131.4 86.0 L128.6 84.9 L125.7 84.2 L122.9 84.0 L120.0 84.4 L117.1 85.6 L114.3 87.5 L111.4 90.1 L108.6 93.5 L105.7 97.4 L102.9 101.7 L100.0 106.4 L97.1 111.1 L94.3 115.7 L91.4 120.1 L88.6 118.7 L85.7 116.1 L82.9 113.3 L80.0 110.6 L77.1 108.1 L74.3 106.0 L71.4 104.4 L68.6 103.6 L65.7 103.5 L62.9 104.1 L60.0 105.5 L57.1 107.6 L54.3 110.3 L51.4 113.3 L48.6 116.7 L45.7 120.2 L42.9 123.7 L40.0 127.2 Z" class="band-s"/>
+          <path d="M40.0 99.6 L42.9 99.2 L45.7 98.9 L48.6 98.8 L51.4 98.8 L54.3 98.9 L57.1 99.0 L60.0 99.2 L62.9 99.4 L65.7 99.6 L68.6 99.7 L71.4 99.7 L74.3 99.7 L77.1 99.6 L80.0 99.3 L82.9 98.9 L85.7 98.3 L88.6 97.6 L91.4 96.7 L94.3 95.6 L97.1 94.4 L100.0 92.9 L102.9 91.4 L105.7 89.6 L108.6 87.7 L111.4 85.8 L114.3 83.7 L117.1 81.5 L120.0 79.3 L122.9 77.0 L125.7 74.8 L128.6 72.6 L131.4 70.5 L134.3 68.5 L137.1 66.6 L140.0 64.8 L142.9 63.3 L145.7 62.0 L148.6 61.0 L151.4 60.3 L154.3 59.8 L157.1 59.8 L160.0 60.0 L162.9 60.7 L165.7 61.7 L168.6 63.2 L171.4 65.0 L174.3 67.2 L177.1 69.9 L180.0 72.9 L182.9 76.4 L185.7 80.2 L188.6 84.3 L191.4 88.8 L194.3 93.6 L197.1 98.6 L200.0 103.9 L202.9 109.4 L205.7 115.1 L208.6 120.9 L211.4 126.7 L214.3 132.6 L217.1 138.5 L220.0 144.3 L222.9 150.0 L225.7 155.5 L228.6 160.8 L231.4 165.9 L234.3 170.8 L237.1 175.2 L240.0 179.4 L242.9 183.1 L245.7 186.4 L248.6 189.3 L251.4 191.7 L254.3 193.6 L257.1 194.9 L260.0 195.8 L262.9 196.2 L265.7 196.0 L268.6 195.3 L271.4 194.1 L274.3 192.4 L277.1 190.3 L280.0 187.6 L282.9 184.6 L285.7 181.1 L288.6 177.3 L291.4 173.2 L294.3 168.8 L297.1 164.1 L300.0 159.2 L302.9 154.1 L305.7 149.0 L308.6 143.7 L311.4 138.4 L314.3 133.1 L317.1 127.9 L320.0 122.8 L322.9 117.8 L325.7 112.9 L328.6 108.3 L331.4 103.9 L334.3 99.7 L337.1 95.9 L340.0 92.3 L342.9 89.0 L345.7 86.1 L348.6 83.6 L351.4 81.3 L354.3 79.4 L357.1 77.9 L360.0 76.7 L362.9 75.8 L365.7 75.2 L368.6 74.9 L371.4 74.9 L374.3 75.1 L377.1 75.5 L380.0 76.2" class="s"/>
+          <circle cx="67.2" cy="99.6" r="4.5" style="fill:var(--ink)"/>
+          <circle cx="114.8" cy="83.3" r="4.5" style="fill:var(--ink)"/>
+          <circle cx="179.4" cy="72.3" r="4.5" style="fill:var(--ink)"/>
+          <circle cx="227.0" cy="157.9" r="4.5" style="fill:var(--ink)"/>
+          <circle cx="250.8" cy="191.2" r="4.5" style="fill:var(--ink)"/>
+          <circle cx="271.2" cy="194.2" r="4.5" style="fill:var(--ink)"/>
+          <circle cx="346.0" cy="85.9" r="4.5" style="fill:var(--ink)"/>
+          <path d="M200 52 l3.5 7 7.5 1 -5.5 5 1.4 7.5 -6.9-3.6 -6.9 3.6 1.4-7.5 -5.5-5 7.5-1z" class="sf"/>
+          <text x="214" y="50" class="lbl">next candidate</text>
+          <path d="M40 214 H380 M40 214 V14" class="ax"/>
+          <text x="40" y="236" class="lbl">adapter parameters</text>
+          <text x="44" y="12" class="lbl">task accuracy</text>
+        </svg>
+        <figcaption>Schematic. The surrogate's mean and uncertainty (shaded) guide where to evaluate next, so each costly model evaluation counts.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project small" id="lie">
+      <div class="body">
+        <h3>Privacy over Lie groups</h3>
+        <p class="with">In progress</p>
+        <p>Many datasets record rigid motions: rotations and translations of bodies, cameras or molecules. These form Lie groups, where the order of operations matters. I am extending intrinsic privacy to this setting, privatizing the group mean with noise built from the group's own structure, and with sensitivity bounds that account for non-commutativity through the Lie bracket.</p>
+      </div>
+    </article>
+
+    <article class="project small">
+      <div class="body">
+        <h3>Domain adaptation for astronomical images</h3>
+        <p>Models trained on simulated galaxy images often stumble on real survey data because noise, blurring and redshift distributions differ. I used optimal-transport alignment to bridge that gap, improving galaxy morphology classification and gravitational-lens size estimates.</p>
+      </div>
+    </article>
+
+    <!-- ================= PHYSICS ================= -->
+    <div class="track-head phys gap" id="physics">
+      <h2>Theoretical physics</h2>
+      <span>With Lorenzo Sorbo, UMass Amherst</span>
+    </div>
+
+    <article class="project" id="fermions">
+      <div class="body">
+        <h3>Fermions produced by evolving axions</h3>
+        <p class="with">With Lorenzo Sorbo · JCAP 2025</p>
+        <p>Axions are hypothetical fields that could be the dark matter or drive cosmic acceleration. As an axion evolves, it can create particles and hand them some of its energy. If enough energy leaks out, the axion's predicted abundance changes.</p>
+        <p>I developed a framework to compute the spectrum of fermions produced this way, in both the radiation and matter eras. An oscillating axion produces both spin orientations almost equally. A slowly rolling one can strongly favor one of them, and heavy fermions produced this way can act as an extra matter component.</p>
+        <div class="papers"><a href="https://doi.org/10.1088/1475-7516/2025/01/039">Read the paper (JCAP)</a></div>
+      </div>
+      <figure class="project-fig">
+        <svg class="fig" viewBox="0 0 400 250" role="img" aria-label="Occupation number versus momentum for two fermion helicities, both below the Pauli limit of one.">
+          <path d="M40 40 H380" class="grid" style="stroke-dasharray:3 4"/>
+          <text x="300" y="34" class="lbl">Pauli limit, n = 1</text>
+          <path d="M40.0 53.6 L42.9 53.6 L45.7 53.7 L48.6 53.9 L51.4 54.2 L54.3 54.6 L57.1 55.1 L60.0 55.7 L62.9 56.4 L65.7 57.2 L68.6 58.1 L71.4 59.1 L74.3 60.2 L77.1 61.5 L80.0 62.8 L82.9 64.3 L85.7 65.9 L88.6 67.5 L91.4 69.3 L94.3 71.2 L97.1 73.1 L100.0 75.2 L102.9 77.3 L105.7 79.5 L108.6 81.8 L111.4 84.2 L114.3 86.7 L117.1 89.2 L120.0 91.7 L122.9 94.4 L125.7 97.0 L128.6 99.7 L131.4 102.5 L134.3 105.3 L137.1 108.1 L140.0 110.9 L142.9 113.8 L145.7 116.6 L148.6 119.5 L151.4 122.4 L154.3 125.2 L157.1 128.1 L160.0 130.9 L162.9 133.7 L165.7 136.5 L168.6 139.3 L171.4 142.0 L174.3 144.7 L177.1 147.4 L180.0 150.0 L182.9 152.5 L185.7 155.0 L188.6 157.5 L191.4 159.9 L194.3 162.2 L197.1 164.5 L200.0 166.7 L202.9 168.9 L205.7 170.9 L208.6 173.0 L211.4 174.9 L214.3 176.8 L217.1 178.6 L220.0 180.4 L222.9 182.1 L225.7 183.7 L228.6 185.2 L231.4 186.7 L234.3 188.2 L237.1 189.5 L240.0 190.8 L242.9 192.0 L245.7 193.2 L248.6 194.3 L251.4 195.4 L254.3 196.4 L257.1 197.3 L260.0 198.2 L262.9 199.1 L265.7 199.9 L268.6 200.6 L271.4 201.3 L274.3 202.0 L277.1 202.6 L280.0 203.2 L282.9 203.7 L285.7 204.2 L288.6 204.7 L291.4 205.1 L294.3 205.5 L297.1 205.9 L300.0 206.3 L302.9 206.6 L305.7 206.9 L308.6 207.2 L311.4 207.4 L314.3 207.7 L317.1 207.9 L320.0 208.1 L322.9 208.3 L325.7 208.4 L328.6 208.6 L331.4 208.7 L334.3 208.8 L337.1 209.0 L340.0 209.1 L342.9 209.2 L345.7 209.2 L348.6 209.3 L351.4 209.4 L354.3 209.5 L357.1 209.5 L360.0 209.6 L362.9 209.6 L365.7 209.7 L368.6 209.7 L371.4 209.7 L374.3 209.8 L377.1 209.8 L380.0 209.8" class="p"/>
+          <path d="M40.0 150.5 L42.9 150.5 L45.7 150.7 L48.6 150.9 L51.4 151.2 L54.3 151.7 L57.1 152.2 L60.0 152.7 L62.9 153.4 L65.7 154.2 L68.6 155.0 L71.4 155.9 L74.3 156.9 L77.1 157.9 L80.0 159.0 L82.9 160.1 L85.7 161.3 L88.6 162.6 L91.4 163.9 L94.3 165.2 L97.1 166.5 L100.0 167.9 L102.9 169.3 L105.7 170.7 L108.6 172.1 L111.4 173.6 L114.3 175.0 L117.1 176.4 L120.0 177.8 L122.9 179.2 L125.7 180.6 L128.6 182.0 L131.4 183.4 L134.3 184.7 L137.1 186.0 L140.0 187.2 L142.9 188.5 L145.7 189.7 L148.6 190.8 L151.4 192.0 L154.3 193.0 L157.1 194.1 L160.0 195.1 L162.9 196.1 L165.7 197.0 L168.6 197.9 L171.4 198.7 L174.3 199.5 L177.1 200.2 L180.0 201.0 L182.9 201.6 L185.7 202.3 L188.6 202.9 L191.4 203.4 L194.3 204.0 L197.1 204.5 L200.0 204.9 L202.9 205.4 L205.7 205.8 L208.6 206.1 L211.4 206.5 L214.3 206.8 L217.1 207.1 L220.0 207.4 L222.9 207.6 L225.7 207.8 L228.6 208.0 L231.4 208.2 L234.3 208.4 L237.1 208.6 L240.0 208.7 L242.9 208.9 L245.7 209.0 L248.6 209.1 L251.4 209.2 L254.3 209.3 L257.1 209.4 L260.0 209.4 L262.9 209.5 L265.7 209.6 L268.6 209.6 L271.4 209.7 L274.3 209.7 L277.1 209.7 L280.0 209.8 L282.9 209.8 L285.7 209.8 L288.6 209.8 L291.4 209.9 L294.3 209.9 L297.1 209.9 L300.0 209.9 L302.9 209.9 L305.7 209.9 L308.6 209.9 L311.4 209.9 L314.3 210.0 L317.1 210.0 L320.0 210.0 L322.9 210.0 L325.7 210.0 L328.6 210.0 L331.4 210.0 L334.3 210.0 L337.1 210.0 L340.0 210.0 L342.9 210.0 L345.7 210.0 L348.6 210.0 L351.4 210.0 L354.3 210.0 L357.1 210.0 L360.0 210.0 L362.9 210.0 L365.7 210.0 L368.6 210.0 L371.4 210.0 L374.3 210.0 L377.1 210.0 L380.0 210.0" class="p dash"/>
+          <text x="128" y="72" class="lbl" style="fill:var(--phys)">helicity +</text>
+          <text x="86" y="140" class="lbl" style="fill:var(--phys)">helicity −</text>
+          <path d="M40 210 H380 M40 210 V20" class="ax"/>
+          <text x="300" y="232" class="lbl">momentum k</text>
+          <text x="44" y="16" class="lbl">occupation n(k)</text>
+        </svg>
+        <figcaption>Schematic. A slowly rolling axion fills one helicity far more than the other, producing an asymmetric fermion population.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project" id="backreaction">
+      <div class="body">
+        <h3>When gauge fields push back during inflation</h3>
+        <p class="with">With Lorenzo Sorbo · Preprint 2026</p>
+        <p>In axion inflation, the rolling inflaton amplifies gauge fields, and those fields drag on the inflaton in return. Because they respond with a delay, the motion can overshoot and oscillate rather than settle smoothly. This matters because the gravitational waves and magnetic fields it produces depend sharply on that history.</p>
+        <p>I built an analytical description of the transition from weak to strong backreaction. Expanding around a reference solution and using a Laplace transform, I predict growth rates, oscillation frequencies and amplitudes directly, and these predictions agree with full numerical solutions.</p>
+        <div class="papers"><a href="https://arxiv.org/abs/2608.29244">Read the preprint (arXiv)</a></div>
+      </div>
+      <figure class="project-fig">
+        <svg class="fig" viewBox="0 0 400 250" role="img" aria-label="The particle-production parameter rising over time and oscillating around a smooth reference solution.">
+          <path d="M40.0 161.9 L41.7 161.8 L43.4 161.8 L45.1 161.7 L46.8 161.7 L48.5 161.6 L50.3 161.5 L52.0 161.5 L53.7 161.4 L55.4 161.3 L57.1 161.2 L58.8 161.1 L60.5 161.0 L62.2 160.9 L63.9 160.8 L65.6 160.7 L67.3 160.6 L69.0 160.4 L70.8 160.3 L72.5 160.1 L74.2 160.0 L75.9 159.8 L77.6 159.6 L79.3 159.4 L81.0 159.2 L82.7 159.0 L84.4 158.7 L86.1 158.4 L87.8 158.2 L89.5 157.9 L91.3 157.5 L93.0 157.2 L94.7 156.9 L96.4 156.5 L98.1 156.1 L99.8 155.6 L101.5 155.2 L103.2 154.7 L104.9 154.2 L106.6 153.6 L108.3 153.1 L110.1 152.4 L111.8 151.8 L113.5 151.1 L115.2 150.4 L116.9 149.7 L118.6 148.9 L120.3 148.1 L122.0 147.2 L123.7 146.3 L125.4 145.3 L127.1 144.4 L128.8 143.3 L130.6 142.3 L132.3 141.2 L134.0 140.0 L135.7 138.8 L137.4 137.6 L139.1 136.3 L140.8 135.1 L142.5 133.7 L144.2 132.4 L145.9 131.0 L147.6 129.6 L149.3 128.1 L151.1 126.7 L152.8 125.2 L154.5 123.7 L156.2 122.2 L157.9 120.7 L159.6 119.2 L161.3 117.7 L163.0 116.2 L164.7 114.7 L166.4 113.3 L168.1 111.8 L169.8 110.4 L171.6 108.9 L173.3 107.5 L175.0 106.2 L176.7 104.8 L178.4 103.5 L180.1 102.3 L181.8 101.0 L183.5 99.8 L185.2 98.7 L186.9 97.6 L188.6 96.5 L190.4 95.4 L192.1 94.4 L193.8 93.5 L195.5 92.6 L197.2 91.7 L198.9 90.9 L200.6 90.1 L202.3 89.3 L204.0 88.6 L205.7 87.9 L207.4 87.2 L209.1 86.6 L210.9 86.0 L212.6 85.5 L214.3 85.0 L216.0 84.5 L217.7 84.0 L219.4 83.6 L221.1 83.2 L222.8 82.8 L224.5 82.4 L226.2 82.0 L227.9 81.7 L229.6 81.4 L231.4 81.1 L233.1 80.9 L234.8 80.6 L236.5 80.4 L238.2 80.2 L239.9 80.0 L241.6 79.8 L243.3 79.6 L245.0 79.4 L246.7 79.2 L248.4 79.1 L250.2 79.0 L251.9 78.8 L253.6 78.7 L255.3 78.6 L257.0 78.5 L258.7 78.4 L260.4 78.3 L262.1 78.2 L263.8 78.1 L265.5 78.1 L267.2 78.0 L268.9 77.9 L270.7 77.9 L272.4 77.8 L274.1 77.7 L275.8 77.7 L277.5 77.6 L279.2 77.6 L280.9 77.6 L282.6 77.5 L284.3 77.5 L286.0 77.5 L287.7 77.4 L289.4 77.4 L291.2 77.4 L292.9 77.3 L294.6 77.3 L296.3 77.3 L298.0 77.3 L299.7 77.3 L301.4 77.2 L303.1 77.2 L304.8 77.2 L306.5 77.2 L308.2 77.2 L309.9 77.2 L311.7 77.2 L313.4 77.1 L315.1 77.1 L316.8 77.1 L318.5 77.1 L320.2 77.1 L321.9 77.1 L323.6 77.1 L325.3 77.1 L327.0 77.1 L328.7 77.1 L330.5 77.1 L332.2 77.1 L333.9 77.1 L335.6 77.1 L337.3 77.1 L339.0 77.1 L340.7 77.0 L342.4 77.0 L344.1 77.0 L345.8 77.0 L347.5 77.0 L349.2 77.0 L351.0 77.0 L352.7 77.0 L354.4 77.0 L356.1 77.0 L357.8 77.0 L359.5 77.0 L361.2 77.0 L362.9 77.0 L364.6 77.0 L366.3 77.0 L368.0 77.0 L369.7 77.0 L371.5 77.0 L373.2 77.0 L374.9 77.0 L376.6 77.0 L378.3 77.0 L380.0 77.0" class="ink dash"/>
+          <path d="M40.0 161.9 L41.7 161.8 L43.4 161.8 L45.1 161.7 L46.8 161.7 L48.5 161.6 L50.3 161.5 L52.0 161.5 L53.7 161.4 L55.4 161.3 L57.1 161.2 L58.8 161.1 L60.5 161.0 L62.2 160.9 L63.9 160.8 L65.6 160.7 L67.3 160.6 L69.0 160.4 L70.8 160.3 L72.5 160.1 L74.2 160.0 L75.9 159.8 L77.6 159.6 L79.3 159.4 L81.0 159.2 L82.7 159.0 L84.4 158.7 L86.1 158.4 L87.8 158.2 L89.5 157.9 L91.3 157.5 L93.0 157.2 L94.7 156.9 L96.4 156.5 L98.1 156.1 L99.8 155.6 L101.5 155.2 L103.2 154.7 L104.9 154.2 L106.6 153.6 L108.3 153.1 L110.1 152.4 L111.8 151.8 L113.5 151.1 L115.2 150.4 L116.9 149.7 L118.6 148.9 L120.3 148.1 L122.0 147.2 L123.7 146.3 L125.4 145.3 L127.1 144.4 L128.8 143.3 L130.6 142.3 L132.3 141.2 L134.0 140.0 L135.7 138.8 L137.4 137.6 L139.1 136.3 L140.8 135.1 L142.5 133.7 L144.2 132.4 L145.9 131.0 L147.6 129.6 L149.3 128.1 L151.1 126.7 L152.8 125.2 L154.5 123.7 L156.2 122.2 L157.9 120.7 L159.6 119.2 L161.3 117.7 L163.0 116.2 L164.7 114.7 L166.4 113.3 L168.1 111.8 L169.8 110.4 L171.6 108.9 L173.3 107.5 L175.0 106.2 L176.7 104.8 L178.4 103.5 L180.1 102.3 L181.8 101.0 L183.5 99.2 L185.2 96.4 L186.9 93.6 L188.6 90.9 L190.4 88.3 L192.1 85.9 L193.8 83.7 L195.5 81.7 L197.2 80.1 L198.9 78.7 L200.6 77.6 L202.3 77.0 L204.0 76.6 L205.7 76.7 L207.4 77.1 L209.1 77.8 L210.9 78.8 L212.6 80.1 L214.3 81.7 L216.0 83.4 L217.7 85.2 L219.4 87.1 L221.1 89.0 L222.8 90.8 L224.5 92.6 L226.2 94.1 L227.9 95.4 L229.6 96.4 L231.4 97.0 L233.1 97.3 L234.8 97.2 L236.5 96.7 L238.2 95.8 L239.9 94.4 L241.6 92.7 L243.3 90.7 L245.0 88.4 L246.7 85.8 L248.4 83.0 L250.2 80.0 L251.9 77.1 L253.6 74.1 L255.3 71.2 L257.0 68.5 L258.7 66.1 L260.4 63.9 L262.1 62.1 L263.8 60.6 L265.5 59.7 L267.2 59.2 L268.9 59.1 L270.7 59.6 L272.4 60.5 L274.1 61.9 L275.8 63.6 L277.5 65.8 L279.2 68.2 L280.9 70.9 L282.6 73.7 L284.3 76.7 L286.0 79.6 L287.7 82.5 L289.4 85.2 L291.2 87.8 L292.9 90.0 L294.6 92.0 L296.3 93.5 L298.0 94.6 L299.7 95.3 L301.4 95.5 L303.1 95.3 L304.8 94.6 L306.5 93.4 L308.2 91.9 L309.9 90.1 L311.7 87.9 L313.4 85.5 L315.1 83.0 L316.8 80.3 L318.5 77.6 L320.2 74.9 L321.9 72.4 L323.6 70.0 L325.3 67.9 L327.0 66.0 L328.7 64.5 L330.5 63.3 L332.2 62.5 L333.9 62.1 L335.6 62.0 L337.3 62.4 L339.0 63.1 L340.7 64.1 L342.4 65.4 L344.1 67.0 L345.8 68.8 L347.5 70.7 L349.2 72.8 L351.0 74.8 L352.7 76.9 L354.4 78.8 L356.1 80.7 L357.8 82.4 L359.5 83.9 L361.2 85.2 L362.9 86.2 L364.6 86.9 L366.3 87.4 L368.0 87.6 L369.7 87.5 L371.5 87.1 L373.2 86.6 L374.9 85.7 L376.6 84.8 L378.3 83.6 L380.0 82.4" class="p"/>
+          <text x="52" y="190" class="lbl">weak backreaction</text>
+          <text x="270" y="56" class="lbl">strong backreaction</text>
+          <text x="246" y="140" class="lbl">reference (dashed)</text>
+          <path d="M40 214 H380 M40 214 V14" class="ax"/>
+          <text x="300" y="236" class="lbl">time →</text>
+          <text x="44" y="12" class="lbl">production rate ξ</text>
+        </svg>
+        <figcaption>Schematic. The delayed response of the gauge fields makes the inflaton's speed oscillate around the instant-response solution.</figcaption>
+      </figure>
+    </article>
+
+    <article class="project" id="pbh">
+      <div class="body">
+        <h3>Primordial black holes from inflation</h3>
+        <p class="with">Current work</p>
+        <p>Lattice simulations show that backreaction is not uniform across space. I am extending my analysis to these inhomogeneities to find how fluctuations are sourced, which scales they prefer, and when the uniform picture breaks down.</p>
+        <p>The payoff is observational. Gauge fields can boost density fluctuations on small scales, and large enough ones collapse into primordial black holes, a possible component of dark matter. I aim to pin down which predictions for black holes, gravitational waves and primordial magnetic fields hold up once backreaction's full structure is included.</p>
+      </div>
+      <figure class="project-fig">
+        <svg class="fig" viewBox="0 0 400 250" role="img" aria-label="Power spectrum flat on large scales with a peak on small scales that crosses a black hole formation threshold.">
+          <path d="M40 66 H380" class="grid" style="stroke-dasharray:3 4"/>
+          <text x="44" y="58" class="lbl">collapse threshold</text>
+          <path d="M40.0 187.2 L41.7 187.2 L43.4 187.2 L45.1 187.2 L46.8 187.2 L48.5 187.2 L50.3 187.2 L52.0 187.2 L53.7 187.2 L55.4 187.2 L57.1 187.2 L58.8 187.2 L60.5 187.2 L62.2 187.2 L63.9 187.2 L65.6 187.2 L67.3 187.2 L69.0 187.2 L70.8 187.2 L72.5 187.2 L74.2 187.2 L75.9 187.2 L77.6 187.2 L79.3 187.2 L81.0 187.2 L82.7 187.2 L84.4 187.2 L86.1 187.2 L87.8 187.2 L89.5 187.2 L91.3 187.2 L93.0 187.2 L94.7 187.2 L96.4 187.2 L98.1 187.2 L99.8 187.2 L101.5 187.2 L103.2 187.2 L104.9 187.2 L106.6 187.2 L108.3 187.2 L110.1 187.2 L111.8 187.2 L113.5 187.2 L115.2 187.2 L116.9 187.2 L118.6 187.2 L120.3 187.2 L122.0 187.2 L123.7 187.2 L125.4 187.2 L127.1 187.2 L128.8 187.2 L130.6 187.2 L132.3 187.2 L134.0 187.2 L135.7 187.2 L137.4 187.2 L139.1 187.2 L140.8 187.2 L142.5 187.2 L144.2 187.2 L145.9 187.2 L147.6 187.2 L149.3 187.2 L151.1 187.2 L152.8 187.2 L154.5 187.2 L156.2 187.2 L157.9 187.2 L159.6 187.2 L161.3 187.2 L163.0 187.2 L164.7 187.2 L166.4 187.2 L168.1 187.2 L169.8 187.2 L171.6 187.2 L173.3 187.2 L175.0 187.2 L176.7 187.2 L178.4 187.2 L180.1 187.2 L181.8 187.2 L183.5 187.2 L185.2 187.2 L186.9 187.2 L188.6 187.2 L190.4 187.2 L192.1 187.2 L193.8 187.2 L195.5 187.2 L197.2 187.2 L198.9 187.2 L200.6 187.2 L202.3 187.2 L204.0 187.2 L205.7 187.2 L207.4 187.1 L209.1 187.1 L210.9 187.1 L212.6 187.1 L214.3 187.0 L216.0 186.9 L217.7 186.9 L219.4 186.8 L221.1 186.6 L222.8 186.4 L224.5 186.2 L226.2 186.0 L227.9 185.6 L229.6 185.2 L231.4 184.8 L233.1 184.2 L234.8 183.5 L236.5 182.6 L238.2 181.6 L239.9 180.4 L241.6 179.0 L243.3 177.4 L245.0 175.6 L246.7 173.5 L248.4 171.1 L250.2 168.4 L251.9 165.4 L253.6 162.1 L255.3 158.4 L257.0 154.4 L258.7 150.1 L260.4 145.5 L262.1 140.7 L263.8 135.5 L265.5 130.2 L267.2 124.7 L268.9 119.1 L270.7 113.5 L272.4 107.9 L274.1 102.4 L275.8 97.0 L277.5 92.0 L279.2 87.2 L280.9 82.9 L282.6 79.1 L284.3 75.9 L286.0 73.2 L287.7 71.3 L289.4 70.0 L291.2 69.4 L292.9 69.6 L294.6 70.5 L296.3 72.1 L298.0 74.4 L299.7 77.4 L301.4 80.9 L303.1 85.0 L304.8 89.5 L306.5 94.4 L308.2 99.6 L309.9 105.0 L311.7 110.5 L313.4 116.2 L315.1 121.8 L316.8 127.4 L318.5 132.8 L320.2 138.0 L321.9 143.0 L323.6 147.8 L325.3 152.2 L327.0 156.4 L328.7 160.2 L330.5 163.7 L332.2 166.9 L333.9 169.7 L335.6 172.3 L337.3 174.5 L339.0 176.5 L340.7 178.2 L342.4 179.7 L344.1 181.0 L345.8 182.1 L347.5 183.0 L349.2 183.8 L351.0 184.5 L352.7 185.0 L354.4 185.4 L356.1 185.8 L357.8 186.1 L359.5 186.3 L361.2 186.5 L362.9 186.7 L364.6 186.8 L366.3 186.9 L368.0 187.0 L369.7 187.0 L371.5 187.1 L373.2 187.1 L374.9 187.1 L376.6 187.1 L378.3 187.2 L380.0 187.2" class="p"/>
+          <path d="M40.0 187.2 L41.7 187.2 L43.4 187.2 L45.1 187.2 L46.8 187.2 L48.5 187.2 L50.3 187.2 L52.0 187.2 L53.7 187.2 L55.4 187.2 L57.1 187.2 L58.8 187.2 L60.5 187.2 L62.2 187.2 L63.9 187.2 L65.6 187.2 L67.3 187.2 L69.0 187.2 L70.8 187.2 L72.5 187.2 L74.2 187.2 L75.9 187.2 L77.6 187.2 L79.3 187.2 L81.0 187.2 L82.7 187.2 L84.4 187.2 L86.1 187.2 L87.8 187.2 L89.5 187.2 L91.3 187.2 L93.0 187.2 L94.7 187.2 L96.4 187.2 L98.1 187.2 L99.8 187.2 L101.5 187.2 L103.2 187.2 L104.9 187.2 L106.6 187.2 L108.3 187.2 L110.1 187.2 L111.8 187.2 L113.5 187.2 L115.2 187.2 L116.9 187.2 L118.6 187.2 L120.3 187.2 L122.0 187.2 L123.7 187.2 L125.4 187.2 L127.1 187.2 L128.8 187.2 L130.6 187.2 L132.3 187.2 L134.0 187.2 L135.7 187.2 L137.4 187.2 L139.1 187.2 L140.8 187.2 L142.5 187.2 L144.2 187.2 L145.9 187.2 L147.6 187.2 L149.3 187.2 L151.1 187.2 L152.8 187.2 L154.5 187.2 L156.2 187.2 L157.9 187.2 L159.6 187.2 L161.3 187.2 L163.0 187.2 L164.7 187.2 L166.4 187.2 L168.1 187.2 L169.8 187.2 L171.6 187.2 L173.3 187.2 L175.0 187.2 L176.7 187.2 L178.4 187.2 L180.1 187.2 L181.8 187.2 L183.5 187.2 L185.2 187.2 L186.9 187.2 L188.6 187.2 L190.4 187.2 L192.1 187.2 L193.8 187.2 L195.5 187.2 L197.2 187.2 L198.9 187.2 L200.6 187.2 L202.3 187.2 L204.0 187.2 L205.7 187.2 L207.4 187.1 L209.1 187.1 L210.9 187.1 L212.6 187.1 L214.3 187.0 L216.0 186.9 L217.7 186.9 L219.4 186.8 L221.1 186.6 L222.8 186.4 L224.5 186.2 L226.2 186.0 L227.9 185.6 L229.6 185.2 L231.4 184.8 L233.1 184.2 L234.8 183.5 L236.5 182.6 L238.2 181.6 L239.9 180.4 L241.6 179.0 L243.3 177.4 L245.0 175.6 L246.7 173.5 L248.4 171.1 L250.2 168.4 L251.9 165.4 L253.6 162.1 L255.3 158.4 L257.0 154.4 L258.7 150.1 L260.4 145.5 L262.1 140.7 L263.8 135.5 L265.5 130.2 L267.2 124.7 L268.9 119.1 L270.7 113.5 L272.4 107.9 L274.1 102.4 L275.8 97.0 L277.5 92.0 L279.2 87.2 L280.9 82.9 L282.6 79.1 L284.3 75.9 L286.0 73.2 L287.7 71.3 L289.4 70.0 L291.2 69.4 L292.9 69.6 L294.6 70.5 L296.3 72.1 L298.0 74.4 L299.7 77.4 L301.4 80.9 L303.1 85.0 L304.8 89.5 L306.5 94.4 L308.2 99.6 L309.9 105.0 L311.7 110.5 L313.4 116.2 L315.1 121.8 L316.8 127.4 L318.5 132.8 L320.2 138.0 L321.9 143.0 L323.6 147.8 L325.3 152.2 L327.0 156.4 L328.7 160.2 L330.5 163.7 L332.2 166.9 L333.9 169.7 L335.6 172.3 L337.3 174.5 L339.0 176.5 L340.7 178.2 L342.4 179.7 L344.1 181.0 L345.8 182.1 L347.5 183.0 L349.2 183.8 L351.0 184.5 L352.7 185.0 L354.4 185.4 L356.1 185.8 L357.8 186.1 L359.5 186.3 L361.2 186.5 L362.9 186.7 L364.6 186.8 L366.3 186.9 L368.0 187.0 L369.7 187.0 L371.5 187.1 L373.2 187.1 L374.9 187.1 L376.6 187.1 L378.3 187.2 L380.0 187.2 L380 210 L40 210 Z" class="band-p"/>
+          <text x="52" y="176" class="lbl">CMB scales</text>
+          <text x="232" y="38" class="lbl" style="fill:var(--phys)">enhanced by gauge fields</text>
+          <path d="M40 210 H380 M40 210 V20" class="ax"/>
+          <text x="296" y="232" class="lbl">smaller scales →</text>
+          <text x="44" y="16" class="lbl">fluctuation power</text>
+        </svg>
+        <figcaption>Schematic. A small-scale peak in the fluctuation spectrum can cross the threshold where regions collapse into black holes.</figcaption>
+      </figure>
+    </article>
+
+    <section class="earlier">
+      <h2>Earlier experimental work</h2>
+      <div class="two-col">
+        <p><strong>MOLLER experiment, UMass Amherst (2020–21)</strong>Designed photon shielding for the experiment's Cherenkov detectors using GEANT4 simulations, and engineered structural changes to the detector assembly in SOLIDWORKS.</p>
+        <p><strong>SoLID mirrors, Stony Brook (M.A. thesis, 2019–20)</strong>Fabricated precision spherical mirrors for Cherenkov detectors in-house, tuning thin-film coatings to maximize ultraviolet reflectivity.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>abkulkarni@umass.edu</span>
+    <nav>
+      <a href="mailto:abkulkarni@umass.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=VPbzASIAAAAJ">Google Scholar</a>
+      <a href="cv.pdf">CV</a>
+    </nav>
+  </footer>
+
+</div>
+</body>
+</html>
