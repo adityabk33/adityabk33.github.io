@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aditya Kulkarni</title>
+  <meta name="description" content="Aditya Kulkarni: differential privacy on manifolds, Bayesian optimization for LLMs, and particle production in the early Universe. Ph.D. candidate at UMass Amherst.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="page">
+
+  <header class="site-head">
+    <a class="mark" href="index.html">Aditya Kulkarni</a>
+    <nav>
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="research.html">Research</a>
+      <a href="publications.html">Publications</a>
+      <a href="teaching.html">Teaching</a>
+      <a href="cv.pdf">CV</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <h1>Aditya Kulkarni</h1>
+        <p class="lede">I use the structure of a problem, its geometry, symmetry and scale, to build methods that work. Right now that means private statistics on curved spaces, cheaper ways to tune language models, and particle production in the early Universe.</p>
+        <p class="who"><strong>Ph.D. candidate in Physics, University of Massachusetts Amherst.</strong><br>
+          Advised by Lorenzo Sorbo. Working with Carlos Soto and Nathan Wycoff in statistics.</p>
+        <div class="actions">
+          <a class="btn solid" href="research.html">See my research</a>
+          <a class="btn" href="cv.pdf">Download CV</a>
+          <a class="btn" href="mailto:abkulkarni@umass.edu">Email me</a>
+        </div>
+        <p class="status">On the 2026–27 academic job market. Ph.D. expected May 2027.</p>
+      </div>
+
+      <figure class="figure-hero">
+        <canvas id="sphere" aria-label="Data points on a sphere with a fitted geodesic curve and its private counterpart"></canvas>
+        <figcaption>Geodesic regression on a sphere: the teal curve fits the data, the dashed curve is its differentially private release. Drag to rotate.</figcaption>
+      </figure>
+    </section>
+
+    <section class="split">
+      <div class="direction stat">
+        <h2>Statistics &amp; machine learning</h2>
+        <p>Methods that respect the shape of the data and the cost of computation.</p>
+        <ul>
+          <li><a href="research.html#privacy"><span class="t">Differential privacy on manifolds</span><span class="d ui">ICML 2026, with Carlos Soto</span></a></li>
+          <li><a href="research.html#llmbo"><span class="t">Bayesian optimization for LLM fine-tuning</span><span class="d ui">LlMBO preprint, 2026</span></a></li>
+          <li><a href="research.html#lie"><span class="t">Privacy over Lie groups</span><span class="d ui">In progress</span></a></li>
+        </ul>
+      </div>
+      <div class="direction phys">
+        <h2>Theoretical physics</h2>
+        <p>How particles produced by axion fields shape the history of the Universe.</p>
+        <ul>
+          <li><a href="research.html#fermions"><span class="t">Fermion production by evolving axions</span><span class="d ui">JCAP 2025, with Lorenzo Sorbo</span></a></li>
+          <li><a href="research.html#backreaction"><span class="t">Backreaction in axion inflation</span><span class="d ui">Preprint, 2026</span></a></li>
+          <li><a href="research.html#pbh"><span class="t">Primordial black holes from inflation</span><span class="d ui">Current work</span></a></li>
+        </ul>
+      </div>
+    </section>
+
+    <p class="bridge">Physics taught me to find what makes a hard problem tractable, and to know where an approximation stops working. I bring the same habit to statistics.</p>
+
+    <section class="block two-col">
+      <div>
+        <h2 class="col-h">Recent news</h2>
+        <ul class="news">
+          <li><time>Oct 2026</time><span>New preprint on <a href="https://arxiv.org/abs/2610.18504">fine-tuning LLMs with Bayesian optimization</a>.</span></li>
+          <li><time>Sep 2026</time><span>Talk on backreaction at the School of Basic Sciences, Campania, Italy.</span></li>
+          <li><time>Aug 2026</time><span>New preprint on <a href="https://arxiv.org/abs/2608.29244">the onset of strong backreaction in axion inflation</a>, and a talk in Leiden.</span></li>
+          <li><time>Jul 2026</time><span>Presented differentially private geodesic regression at ICML in Seoul.</span></li>
+        </ul>
+      </div>
+      <div>
+        <h2 class="col-h">Selected papers</h2>
+        <div class="pub">
+          <a class="title" href="https://proceedings.mlr.press/v306/kulkarni26b.html">Differentially private geodesic regression</a>
+          <span class="meta"><b>A. Kulkarni</b>, C. Soto. ICML 2026</span>
+        </div>
+        <div class="pub">
+          <a class="title" href="https://arxiv.org/abs/2610.18504">How low can you go: fine-tuning LLMs with Bayesian optimization</a>
+          <span class="meta"><b>A. Kulkarni</b>, D. Sartor, C. Soto, N. Wycoff. Preprint 2026</span>
+        </div>
+        <div class="pub phys">
+          <a class="title" href="https://doi.org/10.1088/1475-7516/2025/01/039">Spectra of fermions produced by a time-dependent axion</a>
+          <span class="meta"><b>A. Kulkarni</b>, L. Sorbo. JCAP 2025</span>
+        </div>
+        <p class="ui" style="font-size:.92rem;margin-top:16px"><a href="publications.html">All publications</a></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-foot">
+    <span>abkulkarni@umass.edu</span>
+    <nav>
+      <a href="mailto:abkulkarni@umass.edu">Email</a>
+      <a href="https://scholar.google.com/citations?user=VPbzASIAAAAJ">Google Scholar</a>
+      <a href="cv.pdf">CV</a>
+      <!-- <a href="https://github.com/YOUR-USERNAME">GitHub</a> -->
+      <!-- <a href="https://www.linkedin.com/in/YOUR-PROFILE">LinkedIn</a> -->
+    </nav>
+  </footer>
+
+</div>
+<script src="sphere.js"></script>
+</body>
+</html>
